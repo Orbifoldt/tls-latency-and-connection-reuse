@@ -1,6 +1,7 @@
 # tls-latency-and-connection-reuse
 > This started with the idea that online checks during a SSL handshake can be a cause of latency, and that connection reuse can be a way to avoid that latency.
 > However, it turns out that most (if not all) HTTP clients in python do not do any of these checks. 
+> For benchmark, run `uv run python -m benchmark_httpx --duration 5` or `uv run python -m benchmark_httpx --duration 5 --insecure` to compare reusing vs not reusing async client.
 
 ## Background info
 HTTPS is an HTTP connection that is secured by SSL / TLS. It is built on top of X.509 certificates, which are issued by a certificate authority (CA). The CA signs the certificate, and the client can verify the signature using the CA's public key. (We'll not go into too much details on this kind of Public Key Infrastructure (PKI) here). When a client connects to a server over HTTPS, it performs a TLS handshake, during which the client verifies the server's certificate: it checks the certificate's validity period, its signature.
