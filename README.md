@@ -90,8 +90,13 @@ curl http://localhost:7000/crl-auto?revoked=True --silent | jq
 }
 ```
 
-#### TODO 
-OCSP and OCSP stapling...
+#### TODO: OCSP
+TODO: Here we'll manually call the OCSP responder
+
+#### TODO: OCSP stapling
+TODO: this is supported by curl, so we can use `pycurl` with "SSL_VERIFYSTATUS"
+NB: pycurl can also do CRL, but works pretty much same as httpx (very manual)
+
 
 #### Default httpx (no checks):
 These both will just return 200 responses:
