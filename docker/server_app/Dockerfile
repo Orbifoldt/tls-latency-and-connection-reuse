@@ -20,6 +20,6 @@ COPY docker/server_app/nginx.conf /etc/nginx/nginx.conf
 COPY docker/server_app/entrypoint.sh /entrypoint.sh
 RUN chmod 755 /entrypoint.sh
 
-EXPOSE 8080 8443
+EXPOSE 8080 8442 8443
 
 ENTRYPOINT ["/entrypoint.sh"]
