@@ -79,6 +79,17 @@ curl http://localhost:7000/crl?revoked=True --silent | jq
 }
 ```
 
+#### CRL check with auto-discovered CRL URL for revoked certificate:
+This dynamically gets CRL URL from the presented certificate (instead of it being hardcoded)
+```sh
+curl http://localhost:7000/crl-auto?revoked=True --silent | jq
+```
+```json
+{
+  "error": "Could not connect to server: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate revoked (_ssl.c:1032)"
+}
+```
+
 #### TODO 
 OCSP and OCSP stapling...
 
