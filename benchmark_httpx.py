@@ -94,10 +94,13 @@ async def run_benchmark(
             limits=httpx.Limits(max_connections=concurrency),
         )
 
+    if strategy == "new-client-no-verify":
+        verify = False
+
     async def worker() -> None:
         nonlocal successful_calls
         while time.perf_counter() < deadline:
-            if strategy == "new-client":
+            if strategy == "new-client" or strategy == "new-client-no-verify":
                 latency_ms, status_code = await request_with_new_client(url, verify, timeout)
             else:
                 assert client is not None
@@ -198,7 +201,7 @@ async def main() -> None:
     # operating system's default CA truststore.
     verify = not args.insecure
 
-    for strategy in ("new-client", "reused-client"):
+    for strategy in ("new-client", "reused-client", "new-client-no-verify"):
         LOGGER.info(
             "starting strategy=%s duration=%.1fs concurrency=%d",
             strategy,
